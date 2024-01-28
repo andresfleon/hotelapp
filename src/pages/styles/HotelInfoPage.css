@@ -1,0 +1,17 @@
+.container__hotel__info{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    height: 88vh;
+    padding: 1em;
+}
+.container__img__map{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.hotel__page__img{
+    width: 100%;
+    max-width: 700px;
+}
