@@ -20,6 +20,8 @@ const HomePage = () => {
 
   const[idCity, setIdCity] =useState('all cities')
 
+  const [countryId, setCountryId] = useState()
+
 
 
 
@@ -34,7 +36,6 @@ const HomePage = () => {
 
   }, [])
 
-  console.log(hotels)
 
 
 
@@ -51,7 +52,7 @@ const HomePage = () => {
     //filter cities
     //se hicieron con el backend
 
-    const filterCountry = hotelInfo.city.country.includes(countryFil);
+    const filterCountry = hotelInfo.city.countryId==countryId;
 
 
     return (filterCountry && filterPrice && filterName ) 
@@ -70,12 +71,15 @@ const HomePage = () => {
       <FilterCountry 
       setCountryFil={setCountryFil}
       setIdCity={setIdCity}
+      setCountryId={setCountryId}
  />
       <FilterCities 
       setCitySelected={setCitySelected}
        setCountryFil={ setCountryFil}
        countryFil={countryFil}
        idCity={idCity}
+       countryId={countryId}
+       setCountryId={setCountryId}
       />
       <ListHotels 
         hotelsFilter={hotelsFiltered}

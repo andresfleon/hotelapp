@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import useFetch from '../../hooks/useFetch'
 
-const FilterCountry = ({setCountryFil,setIdCity}) => {
+const FilterCountry = ({setCountryFil,setCountryId}) => {
 
     let url = 'https://hotels-api.academlo.tech/cities'
     const [cities, getCities] = useFetch(url)
@@ -18,7 +18,10 @@ const FilterCountry = ({setCountryFil,setIdCity}) => {
         
         for (let i =0; i<cities?.length;i++){
             if (!countries.includes(cities[i].country)){
-                countries.push(cities[i].country)
+                countries.push({
+                    'name':cities[i].country,
+                    'countryId':cities[i].countryId,
+                })
             }
         }
                 
@@ -27,12 +30,16 @@ const FilterCountry = ({setCountryFil,setIdCity}) => {
 
 
             if(country=='all countries'){
-                console.log('object');
-                setCountryFil('')
+                setCountryId('allC')
+                setCountryFil('')                
+
+                
+              
                 
             }else{
-                setCountryFil(country)
-                setIdCity()
+                setCountryId(country.countryId)
+                setCountryFil(country.name)
+           
 
 
 
@@ -50,8 +57,8 @@ const FilterCountry = ({setCountryFil,setIdCity}) => {
                 <li onClick={()=>handleFilteredCountries('all countries')}> All Countries</li>
                 {
                     countries.map(country => (
-                        <li onClick={()=>handleFilteredCountries(country)} key={country}>
-                            {country}
+                        <li onClick={()=>handleFilteredCountries(country)} key={country.countryId}>
+                            {country.name}
                         </li>
                     ))
                 }

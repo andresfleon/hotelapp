@@ -3,10 +3,10 @@ import useFetch from '../../hooks/useFetch'
 import { getHotelsThunk } from '../../store/states/hotels.state'
 import { useDispatch } from 'react-redux'
 
-const FilterCities = ({ setCitySelected, countryFil,setCountryFil,idCity }) => {
+const FilterCities = ({ setCitySelected, countryFil,setCountryId,idCity, countryId }) => {
 
-    let url = 'https://hotels-api.academlo.tech/cities'
-    const [cities, getCities] = useFetch(url)
+    let urlCities = 'https://hotels-api.academlo.tech/cities'
+    const [cities, getCities] = useFetch(urlCities)
 
     useEffect(() => {
         getCities()
@@ -15,29 +15,43 @@ const FilterCities = ({ setCitySelected, countryFil,setCountryFil,idCity }) => {
 
     const dispatch = useDispatch()
 
+    
+
+    
+
+    
     useEffect(() => {
+        let url = 'https://hotels-api.academlo.tech/hotels'
+
+        dispatch(getHotelsThunk(url))
+
+    }, [countryId])
 
 
-    }, [])
 
 
     const handleFilterCities = (id, name) => {
+
+        
         setCitySelected(name)
         let url = 'https://hotels-api.academlo.tech/hotels'
-        if (name !== 'all cities') {
+        if(countryId=='allC'){
+            url = 'https://hotels-api.academlo.tech/hotels'
+            setCountryId('')
+
+        }
+        
+        else if (name !== 'all cities') {
             url = `https://hotels-api.academlo.tech/hotels?cityId=${id}`
 
-        }else if (countryFil===''&& idCity=='') {
-            url = 'https://hotels-api.academlo.tech/hotels'
         }
-        else if(countryFil && name =='all cities'){
-            setCountryFil('')
+        else if(name =='all cities'){
+            setCountryId('')
 
             url = 'https://hotels-api.academlo.tech/hotels'
 
         }
 
-        console.log(url)
         dispatch(getHotelsThunk(url))
 
     }

@@ -8,10 +8,7 @@ const ListHotels = ({hotelsFilter,citySelected}) => {
 const hotels = useSelector(states => states.hotels)
 
   
-  console.log('-------- -------');
-  console.log(citySelected);
   
-  console.log(hotels)
   
 
  
